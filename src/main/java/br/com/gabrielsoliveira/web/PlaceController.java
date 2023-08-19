@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import reactor.core.publisher.Mono;
 import br.com.gabrielsoliveira.domain.Place;
 import br.com.gabrielsoliveira.domain.PlaceService;
 
@@ -20,9 +20,9 @@ public class PlaceController {
 
     @PostMapping
     public ResponseEntity<Mono<Place>> create(Place place){
-        return ResponseEntity.status(HttpStatus.CREATED).body(placeService);
+    	var createdPlace = placeService.create(place);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdPlace);
 
     }
-
-    
+ 
 }
